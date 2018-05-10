@@ -47,4 +47,14 @@ class RedirectControllerTest {
                 .andExpect(header().string(HEADER_NAME, HEADER_VALUE))
     }
 
+
+    private val BAD_PATH = "/olololo"
+    private val NOT_FOUND: Int = 404
+
+    @Test
+    fun controllerMustReturn404IfBadKey() {
+        mockMvc.perform(get(BAD_PATH))
+                .andExpect(status().`is`(NOT_FOUND))
+    }
+
 }
