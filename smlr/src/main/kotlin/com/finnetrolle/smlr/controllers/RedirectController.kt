@@ -13,11 +13,16 @@ class RedirectController {
     @RequestMapping
     fun redirect(@PathVariable("key") key: String, response: HttpServletResponse) {
         if (key.equals("aAbBcCdD")) {
-            response.setHeader("Location", "http://www.eveonline.com");
+            response.setHeader(HEADER_NAME, "http://www.eveonline.com");
             response.status = 302
         } else {
             response.status = 404
         }
 
     }
+
+    companion object {
+        private val HEADER_NAME = "Location"
+    }
+
 }
