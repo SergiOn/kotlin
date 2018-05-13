@@ -11,11 +11,18 @@ class DefaultKeyMapperService: KeyMapperService {
 
 
     override fun add(key: String, link: String): KeyMapperService.Add {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (map.contains(key)) {
+            return KeyMapperService.Add.AlreadyExist(key)
+        } else {
+            map.put(key, link)
+            return KeyMapperService.Add.Success(key, link)
+        }
     }
 
-    override fun getLink(key: String): KeyMapperService.Add {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getLink(key: String) = if (map.contains(key)) {
+        KeyMapperService.Get.Link(map.get(key)!!)
+    } else {
+        KeyMapperService.Get.NotFound(key)
     }
 
 }

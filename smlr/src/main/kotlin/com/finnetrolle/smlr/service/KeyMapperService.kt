@@ -14,6 +14,6 @@ interface KeyMapperService {
 
     fun add(key: String, link: String): Add
 
-    fun getLink(key: String): Add
+    fun getLink(key: String): Get
 
 }
