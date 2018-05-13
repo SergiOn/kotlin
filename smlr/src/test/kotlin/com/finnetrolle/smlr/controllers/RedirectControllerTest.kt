@@ -1,9 +1,13 @@
 package com.finnetrolle.smlr.controllers
 
 import com.finnetrolle.smlr.SmlrApplication
+import com.finnetrolle.smlr.service.KeyMapperService
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.test.context.web.WebAppConfiguration
@@ -26,8 +30,16 @@ class RedirectControllerTest {
 
     lateinit var mockMvc: MockMvc
 
+    @Mock
+    lateinit var service: KeyMapperService
+
+    @Autowired
+    @InjectMocks
+    lateinit var controller: RedirectController
+
     @Before
     fun init() {
+        MockitoAnnotations.initMocks(this)
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build()
