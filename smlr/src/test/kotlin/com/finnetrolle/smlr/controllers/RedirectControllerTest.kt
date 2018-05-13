@@ -49,7 +49,7 @@ class RedirectControllerTest {
         Mockito.`when`(service.getLink(BAD_PATH)).thenReturn(KeyMapperService.Get.NotFound(BAD_PATH))
     }
 
-    private val PATH = "/aAbBcCdD"
+    private val PATH = "aAbBcCdD"
     private val REDIRECT_STATUS: Int = 302
     private val HEADER_NAME = "Location"
     private val HEADER_VALUE = "http://www.eveonline.com"
@@ -58,18 +58,18 @@ class RedirectControllerTest {
     fun controllerMustRedirectUsWhenRequestIsSuccessful() {
 //        mockMvc.perform(MockMvcRequestBuilders.get(PATH))
 //                .andExpect(MockMvcResultMatchers.status())
-        mockMvc.perform(get(PATH))
+        mockMvc.perform(get("/${PATH}"))
                 .andExpect(status().`is`(REDIRECT_STATUS))
                 .andExpect(header().string(HEADER_NAME, HEADER_VALUE))
     }
 
 
-    private val BAD_PATH = "/olololo"
+    private val BAD_PATH = "olololo"
     private val NOT_FOUND: Int = 404
 
     @Test
     fun controllerMustReturn404IfBadKey() {
-        mockMvc.perform(get(BAD_PATH))
+        mockMvc.perform(get("/${BAD_PATH}"))
                 .andExpect(status().`is`(NOT_FOUND))
     }
 
