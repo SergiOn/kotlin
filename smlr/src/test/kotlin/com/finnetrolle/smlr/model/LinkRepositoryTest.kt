@@ -12,6 +12,7 @@ import org.hamcrest.Matchers.*
 import org.hamcrest.MatcherAssert.assertThat
 
 
+//@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = LinkRepositoryTest.DATASET)
 @DatabaseSetup(LinkRepositoryTest.DATASET)
 @DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = [(LinkRepositoryTest.DATASET)])
 open class LinkRepositoryTest : AbstractRepositoryTest() {
@@ -19,7 +20,7 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
     @Autowired
     lateinit var repository: LinkRepository
 
-    @Test()
+    @Test
     fun findOneExisting() {
         val got: Optional<Link> = repository.findOne(LINK_1_ID)
         assertThat(got.isPresent, equalTo(true))
@@ -27,13 +28,13 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
         assertThat(link, equalTo(Link(LINK_1_TEXT, LINK_1_ID)))
     }
 
-    @Test()
+    @Test
     fun findOneNotExisting() {
         val got: Optional<Link> = repository.findOne(LINK_NOT_FOUND)
         assertThat(got.isPresent, equalTo(false))
     }
 
-    @Test()
+    @Test
     fun saveNew() {
         val toBeSaved: Link = Link(LINK_TBS_TEXT)
         val got: Link = repository.save(toBeSaved)
@@ -45,10 +46,10 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
 
     companion object {
         const val DATASET = "classpath:datasets/link-table.xml"
+        private val LINK_NOT_FOUND: Long = 1L
         private val LINK_1_ID: Long = 100500L
         private val LINK_1_TEXT: String = "http://www.eveonline.com"
         private val LINK_TBS_TEXT: String = "http://www.ru"
-        private val LINK_NOT_FOUND: Long = 1L
     }
 
 }
