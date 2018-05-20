@@ -1,5 +1,9 @@
 package com.finnetrolle.smlr.service
 
+import org.springframework.stereotype.Component
+
+
+@Component
 class DefaultKeyConverterService : KeyConverterService {
 
     val chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-_".toCharArray()
