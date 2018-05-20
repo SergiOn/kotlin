@@ -38,9 +38,9 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
     fun saveNew() {
         val toBeSaved: Link = Link(LINK_TBS_TEXT)
         val got: Link = repository.save(toBeSaved)
-        val link: List<Link> = repository.findAll()
+        val list: List<Link> = repository.findAll()
 
-        assertThat(link, hasSize(4))
+        assertThat(list, hasSize(4))
         assertThat(got.text, equalTo(LINK_TBS_TEXT))
     }
 
@@ -48,8 +48,8 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
         const val DATASET = "classpath:datasets/link-table.xml"
         private val LINK_NOT_FOUND: Long = 1L
         private val LINK_1_ID: Long = 100500L
-        private val LINK_1_TEXT: String = "http://www.eveonline.com"
         private val LINK_TBS_TEXT: String = "http://www.ru"
+        private val LINK_1_TEXT: String = "http://www.eveonline.com"
     }
 
 }
