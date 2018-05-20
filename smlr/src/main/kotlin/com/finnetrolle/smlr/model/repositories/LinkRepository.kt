@@ -10,7 +10,7 @@ import java.util.*
 //interface LinkRepository : JpaRepository {
 
 interface LinkRepository : Repository<Link, Long> {
-    fun findOne(id: Long): Optional<Link>
+    fun findOne(id: Long?): Optional<Link>
     fun save(link: Link): Link
     fun findAll(): List<Link>
 }
