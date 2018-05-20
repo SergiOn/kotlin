@@ -1,6 +1,7 @@
-package com.finnetrolle.smlr.model.repositories
+package com.finnetrolle.smlr.model
 
 import com.finnetrolle.smlr.model.AbstractRepositoryTest
+import com.finnetrolle.smlr.model.repositories.LinkRepository
 import com.github.springtestdbunit.annotation.DatabaseOperation
 import com.github.springtestdbunit.annotation.DatabaseSetup
 import com.github.springtestdbunit.annotation.DatabaseTearDown
@@ -38,7 +39,7 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
         val got: Link = repository.save(toBeSaved)
         val link: List<Link> = repository.findAll()
 
-        assertThat(list, hasSize(4))
+        assertThat(link, hasSize(4))
         assertThat(got.text, equalTo(LINK_TBS_TEXT))
     }
 
