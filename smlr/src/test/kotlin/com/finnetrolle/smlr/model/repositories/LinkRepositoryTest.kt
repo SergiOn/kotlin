@@ -1,7 +1,7 @@
-package com.finnetrolle.smlr.model
+package com.finnetrolle.smlr.model.repositories
 
 import com.finnetrolle.smlr.model.AbstractRepositoryTest
-import com.finnetrolle.smlr.model.repositories.LinkRepository
+import com.finnetrolle.smlr.model.Link
 import com.github.springtestdbunit.annotation.DatabaseOperation
 import com.github.springtestdbunit.annotation.DatabaseSetup
 import com.github.springtestdbunit.annotation.DatabaseTearDown
