@@ -13,7 +13,7 @@ import org.hamcrest.MatcherAssert.assertThat
 
 
 @DatabaseSetup(LinkRepositoryTest.DATASET)
-@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = LinkRepositoryTest.DATASET)
+@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = [(LinkRepositoryTest.DATASET)])
 open class LinkRepositoryTest : AbstractRepositoryTest() {
 
     @Autowired
