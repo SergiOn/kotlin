@@ -17,7 +17,8 @@ class DefaultKeyMapperService: KeyMapperService {
     private val map: MutableMap<Long, String> = ConcurrentHashMap()
 
     override fun add(link: String): String {
-        val id = sequence.get()
+//        val id = sequence.get()
+        val id = sequence.getAndIncrement()
         val key = converter.idToKey(id)
         map.put(id, link)
         return key
