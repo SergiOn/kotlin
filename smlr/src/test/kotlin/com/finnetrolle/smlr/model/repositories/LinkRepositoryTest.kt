@@ -2,6 +2,7 @@ package com.finnetrolle.smlr.model.repositories
 
 import com.finnetrolle.smlr.model.AbstractRepositoryTest
 import com.finnetrolle.smlr.model.Link
+//import com.finnetrolle.smlr.model.repositories.LinkRepository
 import com.github.springtestdbunit.annotation.DatabaseOperation
 import com.github.springtestdbunit.annotation.DatabaseSetup
 import com.github.springtestdbunit.annotation.DatabaseTearDown
@@ -22,7 +23,8 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
 
     @Test
     fun findOneExisting() {
-        val got: Optional<Link> = repository.findOne(LINK_1_ID)
+//        val got: Optional<Link> = repository.findOne(LINK_1_ID)
+        val got: Optional<Link> = repository.findById(LINK_1_ID)
         assertThat(got.isPresent, equalTo(true))
         val link = got.get()
         assertThat(link, equalTo(Link(LINK_1_TEXT, LINK_1_ID)))
@@ -30,7 +32,8 @@ open class LinkRepositoryTest : AbstractRepositoryTest() {
 
     @Test
     fun findOneNotExisting() {
-        val got: Optional<Link> = repository.findOne(LINK_NOT_FOUND)
+//        val got: Optional<Link> = repository.findOne(LINK_NOT_FOUND)
+        val got: Optional<Link> = repository.findById(LINK_NOT_FOUND)
         assertThat(got.isPresent, equalTo(false))
     }
 
