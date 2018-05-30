@@ -8,3 +8,19 @@ pgsql-test
 
 docker hub
 https://hub.docker.com/_/postgres/
+
+
+pgAdmin 4
+
+name: pgrs-test
+
+host name / address: 192.168.99.100
+
+port: 6000
+
+maintenance database: postgres
+
+username: postgres
+
+password: password
+
