@@ -7,6 +7,11 @@ docker-machine ip
 docker-machine ls
 
 
+docker ps -a
+
+docker start pgsql-test
+
+
 name
 pgsql-test
 
