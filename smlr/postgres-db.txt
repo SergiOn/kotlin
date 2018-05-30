@@ -1,0 +1,10 @@
+docker run --name pgsql-test -e POSTGRES_PASSWORD=password -d -p 6000:5432 postgres
+
+docker ps
+
+
+name
+pgsql-test
+
+docker hub
+https://hub.docker.com/_/postgres/
