@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.TestPropertySource
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.test.web.servlet.MockMvc
 //import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 
+@TestPropertySource(locations = arrayOf("classpath:repositories-test.properties"))
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest(classes = arrayOf(SmlrApplication::class))
 @WebAppConfiguration
