@@ -18,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext
 import org.springframework.test.web.servlet.MockMvc
 //import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 //import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -73,6 +74,11 @@ class RedirectControllerTest {
     fun controllerMustReturn404IfBadKey() {
         mockMvc.perform(get("/${BAD_PATH}"))
                 .andExpect(status().`is`(NOT_FOUND))
+    }
+
+    @Test fun homeWorksFine() {
+        mockMvc.perform(get("/"))
+                .andExpect(MockMvcResultMatchers.view().name("home"))
     }
 
 }
