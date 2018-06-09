@@ -3,6 +3,7 @@ jdk: oraclejdk8
 
 before_install:
   - cd smlr
+  - mvn -N io.takari:maven:wrapper
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
