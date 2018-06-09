@@ -1,9 +1,12 @@
 language: java
 jdk: oraclejdk8
 
+before_install:
+  - cd smlr
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
-notification:
-  email:
-    - sergeonishhenko@gmail.com
+#notifications:
+#  email:
+#    - sergeonishhenko@gmail.com
