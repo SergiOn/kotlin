@@ -14,3 +14,12 @@
 * https://stackoverflow.com/questions/46493500/hibernate-with-c3p0-createclob-is-not-yet-implemented
 * https://stackoverflow.com/questions/14468464/how-to-specify-a-build-folder-in-travis
 * http://www.baeldung.com/maven-wrapper
+
+
+## Server-Side Development with Kotlin and Spring Boot
+
+https://www.udemy.com/server-side-development-with-kotlin-and-spring-boot/
+
+##### About this course
+
+Start working on your own apps with Kotlin right away after finishing this course.
