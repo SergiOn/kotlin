@@ -1,6 +1,7 @@
 package com.example.hrapp.service
 
 import com.example.hrapp.model.Employee
+import com.example.hrapp.model.EmployeeUpdateReg
 import org.springframework.stereotype.Service
 import reactor.core.publisher.toFlux
 //import reactor.core.publisher.Mono
@@ -24,5 +25,16 @@ class EmployeeService {
     fun getAllEmployees(minAge: Int? = null, minSalary: Double? = null) = employeeDb.values.toFlux()
                     .filter { it.age >= minAge ?: Int.MIN_VALUE }
                     .filter { it.salary >= minSalary ?: Double.MIN_VALUE }
+
+    fun updateEmployee(id: Int, updateEmployee: EmployeeUpdateReg) {
+        val employeeOnDb = employeeDb[id]!!
+        employeeDb[id] = Employee(
+                employeeOnDb.id,
+                employeeOnDb.name,
+                employeeOnDb.age,
+                updateEmployee.department ?: employeeOnDb.department,
+                updateEmployee.salary ?: employeeOnDb.salary
+        )
+    }
 
 }

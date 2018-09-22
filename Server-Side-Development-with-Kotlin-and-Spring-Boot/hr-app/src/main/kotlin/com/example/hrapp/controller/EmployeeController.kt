@@ -1,6 +1,7 @@
 package com.example.hrapp.controller
 
 import com.example.hrapp.model.Employee
+import com.example.hrapp.model.EmployeeUpdateReg
 import com.example.hrapp.service.DepartmentService
 import com.example.hrapp.service.EmployeeService
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,5 +34,11 @@ class EmployeeController {
 
     @GetMapping("/departments")
     fun getAllDepartments() = departmentService.getAllDepartments()
+
+    @PutMapping("/employee/{id}")
+    fun updateEmployee(@PathVariable id: Int,
+                       @RequestBody updateEmployee: EmployeeUpdateReg) {
+        employeeService.updateEmployee(id, updateEmployee)
+    }
 
 }

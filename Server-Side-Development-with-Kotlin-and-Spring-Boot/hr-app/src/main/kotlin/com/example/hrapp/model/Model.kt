@@ -4,6 +4,11 @@ data class Employee(
         val id: Int,
         val name: String,
         val age: Int,
-        val department: String,
-        val salary: Double
+        var department: String,
+        var salary: Double
+)
+
+data class EmployeeUpdateReg(
+        val department: String?,
+        val salary: Double?
 )
