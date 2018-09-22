@@ -2,6 +2,7 @@ package com.example.hrapp.service
 
 import com.example.hrapp.model.Employee
 import org.springframework.stereotype.Service
+import reactor.core.publisher.toFlux
 //import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 
@@ -19,5 +20,9 @@ class EmployeeService {
 
 //    fun getEmployee(id: Int) = Mono.from<Employee> { employeeDb[id] }
     fun getEmployee(id: Int) = employeeDb[id]?.toMono()
+
+    fun getAllEmployees(minAge: Int? = null, minSalary: Double? = null) = employeeDb.values.toFlux()
+                    .filter { it.age >= minAge ?: Int.MIN_VALUE }
+                    .filter { it.salary >= minSalary ?: Double.MIN_VALUE }
 
 }
