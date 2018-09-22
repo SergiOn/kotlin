@@ -37,4 +37,6 @@ class EmployeeService {
         )
     }
 
+    fun deleteEmployee(id: Int) = employeeDb.remove(id)
+
 }
