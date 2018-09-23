@@ -1,7 +1,7 @@
 package com.example.hrapp.service
 
 //import reactor.core.publisher.Mono
-import com.example.hrapp.model.Employee
+import com.example.hrapp.model.EmployeeDTO
 import com.example.hrapp.model.EmployeeUpdateReg
 import com.example.hrapp.repository.EmployeeRepo
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,16 +13,16 @@ class EmployeeService {
     @Autowired
     lateinit var employeeDb: EmployeeRepo
 
-    fun createEmployee(employee: Employee) = employeeDb.save(employee)
+    fun createEmployee(employeeDTO: EmployeeDTO) = employeeDb.save(EmployeeDTO.newEmployee(employeeDTO))
 
-    fun getEmployee(id: Int) = employeeDb.findById(id)
+    fun getEmployee(id: String) = employeeDb.findById(id)
 
     fun getAllEmployees(minAge: Int? = null, minSalary: Double? = null)
             = employeeDb.findAll()
                 .filter { it.age >= minAge ?: Int.MIN_VALUE }
                 .filter { it.salary >= minSalary ?: Double.MIN_VALUE }
 
-    fun updateEmployee(id: Int, updateEmployee: EmployeeUpdateReg) =
+    fun updateEmployee(id: String, updateEmployee: EmployeeUpdateReg) =
             employeeDb.findById(id)
                 .flatMap {
                     it.department = updateEmployee.department ?: it.department
@@ -30,7 +30,7 @@ class EmployeeService {
                     employeeDb.save(it)
                 }
 
-    fun deleteEmployee(id: Int) = employeeDb.deleteById(id)
+    fun deleteEmployee(id: String) = employeeDb.deleteById(id)
 
 
 //    companion object {
