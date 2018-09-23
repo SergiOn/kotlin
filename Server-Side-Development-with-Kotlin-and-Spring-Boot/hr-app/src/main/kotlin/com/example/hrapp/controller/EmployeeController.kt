@@ -19,9 +19,13 @@ class EmployeeController {
     @Autowired
     lateinit var departmentService: DepartmentService
 
+//    @PostMapping("/employee")
+//    fun createEmployee(@RequestBody employee: Employee): Mono<ResponseEntity<String>> = employeeService.createEmployee(employee)
+//            .map { _ -> ResponseEntity.status(HttpStatus.CREATED).build<String>() }
+
     @PostMapping("/employee")
-    fun createEmployee(@RequestBody employee: Employee): Mono<ResponseEntity<String>> = employeeService.createEmployee(employee)
-            .map { _ -> ResponseEntity.status(HttpStatus.CREATED).build<String>() }
+    fun createEmployee(@RequestBody employee: Employee): Mono<ResponseEntity<Employee>> = employeeService.createEmployee(employee)
+            .map { newEmployee -> ResponseEntity.status(HttpStatus.CREATED).body(newEmployee) }
 
     @GetMapping("/employee/{id}")
     fun getEmployee(@PathVariable("id") id: Int) = employeeService.getEmployee(id)
