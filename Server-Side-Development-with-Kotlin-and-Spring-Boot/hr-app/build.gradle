@@ -47,7 +47,7 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
-//	compile('org.springframework.boot:spring-boot-starter-data-cassandra-reactive')
+	compile('org.springframework.boot:spring-boot-starter-data-cassandra-reactive')
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	compile('com.fasterxml.jackson.module:jackson-module-kotlin')
