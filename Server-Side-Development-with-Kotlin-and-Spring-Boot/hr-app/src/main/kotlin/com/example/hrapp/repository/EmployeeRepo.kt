@@ -2,5 +2,7 @@ package com.example.hrapp.repository
 
 import com.example.hrapp.model.Employee
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository
+import org.springframework.stereotype.Repository
 
-interface EmployeeRepo: ReactiveCassandraRepository<Int, Employee>
+@Repository
+interface EmployeeRepo: ReactiveCassandraRepository<Employee, Int>
