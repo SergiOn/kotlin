@@ -22,4 +22,12 @@ https://www.udemy.com/server-side-development-with-kotlin-and-spring-boot/
 
 ##### About this course
 
-Start working on your own apps with Kotlin right away after finishing this course.
+Start working on your own apps with Kotlin right away after finishing this course
+
+## Getting Started with Reactive Programming with Kotlin
+
+https://www.udemy.com/getting-started-with-reactive-programming-with-kotlin/
+
+##### About this course
+
+Write reliable, scalable & high-performance code for asynchronous app, with state of the art techniques & frameworks
