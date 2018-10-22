@@ -29,7 +29,8 @@ class FakeDb: Db {
         return getAllUser()
                 .filter { it.id == id }
                 .firstOrError()
-                .onErrorResumeNext { e -> Single.error(UserNotFound("Id: $id not found on the records")) }
+                .onErrorResumeNext { _ -> Single.error(UserNotFound("Id: $id not found on the records")) }
+//                .onErrorResumeNext { e -> Single.error(UserNotFound("Id: $id not found on the records")) }
     }
 
     override fun getPointsForUserId(id: Int): Single<Int> {
