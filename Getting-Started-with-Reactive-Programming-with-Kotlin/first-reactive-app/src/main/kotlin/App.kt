@@ -1,3 +1,7 @@
+import io.reactivex.Single
+import io.reactivex.functions.BiFunction
+import io.reactivex.rxkotlin.zipWith
+
 fun main(args: Array<String>) {
 
     val db: FakeDb = FakeDb()
@@ -29,6 +33,23 @@ fun main(args: Array<String>) {
             .flatMapSingle { db.getPointsForUserId(it.id) }
             .filter { it > 10 }
             .subscribe { println(it) }
+
+    println("--- zip ---")
+
+    db.getAllUser()
+            .flatMapSingle { Single.zip(Single.just(it), db.getPointsForUserId(it.id),
+                    BiFunction {
+                        user: User, points: Int -> "${user.name} has $points!"
+                    })
+            }
+            .subscribe { println(it) }
+
+    println("--- zipWith: zip kotlin ---")
+
+    db.getAllUser()
+            .flatMapSingle { Single.just(it).zipWith(db.getPointsForUserId(it.id), { user: User, points: Int -> "${user.name} has $points!" }) }
+            .subscribe { println(it) }
+
 
 //    // Get all users's names
 //    db.getUsers()
