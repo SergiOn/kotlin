@@ -1,7 +1,7 @@
 
+import io.reactivex.rxkotlin.blockingSubscribeBy
 import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.rx2.rxFlowable
 
 fun main(args: Array<String>) {
 
@@ -61,16 +61,43 @@ fun main(args: Array<String>) {
 //    job.forEach { it.join() }
     // out of memory
 
-    runBlocking {
-        val job = List(1_000_000) {
-            launch {
-                delay(1000L)
-            }
-        }
+//    runBlocking {
+//        val job = List(1_000_000) {
+//            launch {
+//                delay(1000L)
+//            }
+//        }
+//
+//        job.forEach { it.join() }
+//    }
 
-        job.forEach { it.join() }
+
+
+//    listOf("Alberto", "Peter", "John").toFlowable()
+//            .map {
+//                it.toUpperCase()
+//            }
+//            .blockingSubscribeBy(
+//                    onNext = {
+//                        println(it)
+//                    }
+//            )
+
+    rxFlowable {
+
+        delay(100L)
+
+        listOf("Alberto", "Peter", "John")
+                .forEach { send(it) }
+
+    }.map {
+        it.toUpperCase()
     }
-
+    .blockingSubscribeBy(
+            onNext = {
+                println(it)
+            }
+    )
 
 
 }
