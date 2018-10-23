@@ -1,8 +1,10 @@
 package com.solution
 
 import io.reactivex.Flowable
+import io.reactivex.rxkotlin.blockingSubscribeBy
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.toFlowable
+import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>) {
 
@@ -189,5 +191,52 @@ fun main(args: Array<String>) {
                         println("Stream is complete")
                     }
             )
+
+    println("--- toFlowable: delay, blockingSubscribeBy ---")
+
+    listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+//            .delay(10, TimeUnit.HOURS)
+            .flatMap {
+                if (it == "Carl")
+                    Flowable.empty()
+                else
+                    Flowable.just(it)
+            }
+            .timeout(3, TimeUnit.SECONDS)
+            .blockingSubscribeBy(
+                    onNext = {
+                        println(it)
+                    },
+                    onError = {
+                        println("We had an exception")
+                    },
+                    onComplete = {
+                        println("Stream is complete")
+                    }
+            )
+
+    println("--- toFlowable: delay, blockingSubscribeBy, timeout ---")
+
+    listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+            .delay(10, TimeUnit.HOURS)
+            .flatMap {
+                if (it == "Carl")
+                    Flowable.empty()
+                else
+                    Flowable.just(it)
+            }
+            .timeout(3, TimeUnit.SECONDS)
+            .blockingSubscribeBy(
+                    onNext = {
+                        println(it)
+                    },
+                    onError = {
+                        println("We had an exception: $it")
+                    },
+                    onComplete = {
+                        println("Stream is complete")
+                    }
+            )
+    // after 3 seconds error: We had an exception: java.util.concurrent.TimeoutException
 
 }
