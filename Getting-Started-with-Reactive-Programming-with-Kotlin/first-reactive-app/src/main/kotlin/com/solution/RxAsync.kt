@@ -1,5 +1,6 @@
 package com.solution
 
+import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.toFlowable
 
@@ -87,6 +88,96 @@ fun main(args: Array<String>) {
     println("--- toFlowable: Complete ---")
 
     listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+            .subscribeBy(
+                    onNext = {
+                        println(it)
+                    },
+                    onError = {
+                        println("We had an exception")
+                    },
+                    onComplete = {
+                        println("Stream is complete")
+                    }
+            )
+
+    println("--- toFlowable: doOnError ---")
+
+    listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+            .doOnNext {
+                if (it == "Carl")
+                    throw (IllegalArgumentException("Invalid"))
+            }
+            .doOnError {
+                println("On error has occur!")
+            }
+            .subscribeBy(
+                    onNext = {
+                        println(it)
+                    },
+                    onError = {
+                        println("We had an exception")
+                    },
+                    onComplete = {
+                        println("Stream is complete")
+                    }
+            )
+
+    println("--- toFlowable: onErrorReturn ---")
+
+    listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+            .doOnNext {
+                if (it == "Carl")
+                    throw (IllegalArgumentException("Invalid"))
+            }
+//            .doOnError {
+//                println("On error has occur!")  // execute
+//            }
+            .onErrorReturn { "Sample value" }
+//            .doOnError {
+//                println("On error has occur!")  // does not execute
+//            }
+            .subscribeBy(
+                    onNext = {
+                        println(it)
+                    },
+                    onError = {
+                        println("We had an exception")
+                    },
+                    onComplete = {
+                        println("Stream is complete")
+                    }
+            )
+
+    println("--- toFlowable: onErrorResumeNext ---")
+
+    listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+            .doOnNext {
+                if (it == "Carl")
+                    throw (IllegalArgumentException("Invalid"))
+            }
+            .onErrorResumeNext(listOf("Name on db 1", "name on db 2").toFlowable())
+            .subscribeBy(
+                    onNext = {
+                        println(it)
+                    },
+                    onError = {
+                        println("We had an exception")
+                    },
+                    onComplete = {
+                        println("Stream is complete")
+                    }
+            )
+
+    println("--- toFlowable: Flowable logic ---")
+
+    listOf("Alberto", "Peter", "Lara", "Carl", "James").toFlowable()
+            .flatMap {
+                if (it == "Carl")
+                    Flowable.empty()
+                else
+                    Flowable.just(it)
+            }
+            .onErrorResumeNext(listOf("Name on db 1", "name on db 2").toFlowable())
             .subscribeBy(
                     onNext = {
                         println(it)
