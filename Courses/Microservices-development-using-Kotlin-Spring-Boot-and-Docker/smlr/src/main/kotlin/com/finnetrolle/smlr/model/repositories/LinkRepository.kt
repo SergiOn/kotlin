@@ -6,8 +6,6 @@ import com.finnetrolle.smlr.model.Link
 import org.springframework.data.repository.Repository
 import java.util.*
 
-
-
 //interface LinkRepository : JpaRepository<Link, Long> {
 //interface LinkRepository : CrudRepository<Link, Long> {
 interface LinkRepository : Repository<Link, Long> {
